@@ -6,11 +6,27 @@ public class CharacterMovement : MonoBehaviour
     public float extraSpeedFromApple = 100f; // Extra speed gained from picking up an apple
     public float jumpForce = 10f;
 
+    private static CharacterMovement instance;
+    public static CharacterMovement Instance { get { return instance; } }
+
     private Rigidbody2D rb;
     private bool canJump = true;
     private float jumpCooldown = 3f;
     private float jumpTimer = 0f;
     private bool extraSpeedActive = false;
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+    }
 
     private void Start()
     {
