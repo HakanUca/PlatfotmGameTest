@@ -24,7 +24,7 @@ public class Collectible : MonoBehaviour
 
             // Once collected, destroy the collectible object
             Destroy(gameObject);
-            count++;    
+            count++;
         }
 
     }
