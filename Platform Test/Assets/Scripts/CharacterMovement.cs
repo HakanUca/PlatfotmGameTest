@@ -3,8 +3,12 @@ using UnityEngine;
 public class CharacterMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public float extraSpeedFromApple = 100f; // Extra speed gained from picking up an apple
+    public float extraSpeedFromApple = 5f; // Extra speed gained from picking up an apple
     public float jumpForce = 10f;
+    public float extraJumpFromApple = 3f; // Extra jump gained from picking up an apple
+
+
+
 
     private static CharacterMovement instance;
     public static CharacterMovement Instance { get { return instance; } }
@@ -14,6 +18,8 @@ public class CharacterMovement : MonoBehaviour
     private float jumpCooldown = 3f;
     private float jumpTimer = 0f;
     private bool extraSpeedActive = false;
+    private bool extraJumpActive = false;
+
 
     private void Awake()
     {
@@ -41,13 +47,16 @@ public class CharacterMovement : MonoBehaviour
         // Apply extra speed if it's active
         float currentMoveSpeed = extraSpeedActive ? moveSpeed + extraSpeedFromApple : moveSpeed;
 
+
         Vector2 movement = new Vector2(horizontalInput * currentMoveSpeed, rb.velocity.y);
         rb.velocity = movement;
 
         // Jumping
         if (canJump && Input.GetButtonDown("Jump"))
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            float currentJumpForce = extraJumpActive ? jumpForce + extraJumpFromApple : jumpForce;
+
+            rb.velocity = new Vector2(rb.velocity.x, currentJumpForce);
             canJump = false;
             jumpTimer = jumpCooldown;
         }
@@ -73,5 +82,15 @@ public class CharacterMovement : MonoBehaviour
             Destroy(collision.gameObject); // Destroy the apple object
             // You can also add some visual/audio feedback here
         }
+        // Check if the collided object is an apple
+        if (collision.gameObject.name == "PotionJump")
+        {
+            // Apply extra speed from the apple
+            extraJumpActive = true;
+            Destroy(collision.gameObject); // Destroy the apple object
+            // You can also add some visual/audio feedback here
+        }
     }
+
+
 }
