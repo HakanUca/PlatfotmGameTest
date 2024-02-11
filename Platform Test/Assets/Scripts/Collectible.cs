@@ -28,7 +28,7 @@ public class Collectible : MonoBehaviour
     {
         if (count == 3)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         }
     }
 }
