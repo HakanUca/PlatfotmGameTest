@@ -14,7 +14,7 @@ public class CharacterMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool canJump = true;
-    private float jumpCooldown = 3f;
+    private float jumpCooldown = 1f;
     private float jumpTimer = 0f;
     private bool extraSpeedActive = false;
     private bool extraJumpActive = false;
