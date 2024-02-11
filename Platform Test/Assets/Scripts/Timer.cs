@@ -1,3 +1,9 @@
+//------------------------------------
+//      HAKAN UCA
+//  GITHUB:https://github.com/HakanUca
+//------------------------------------
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,13 +15,12 @@ public class Timer : MonoBehaviour
     public float timeRemaining = 0;
     public bool timeIsRunning = true;
     public TMP_Text timeText;
-    // Start is called before the first frame update
+
     void Start()
     {
         timeIsRunning = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (timeIsRunning)

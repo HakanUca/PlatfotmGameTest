@@ -1,33 +1,41 @@
+//------------------------------------
+//      HAKAN UCA
+//  GITHUB:https://github.com/HakanUca
+//------------------------------------
+
+
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Collectible : MonoBehaviour
 {
+    // Static variable to keep track of the total number of collectibles collected
     public static int count = 0;
 
-    // This function is called when the player collects the object
+    // Triggered when the collectible collider overlaps with another collider
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Check if the object that triggered the collision has a CharacterMovement component
+        // Check if the collider belongs to the player character
         CharacterMovement playerCharacter = other.GetComponent<CharacterMovement>();
 
+        // If the collider belongs to the player character
         if (playerCharacter != null)
         {
-            // Add your collectible logic here
-            // For example, you might increase the player's score, play a sound effect, etc.
-
-            // Once collected, destroy the collectible object
-            // Also increase the collected skull objects count.
+            // Destroy the collectible object
             Destroy(gameObject);
+            // Increment the count of collected collectibles
             count++;
         }
     }
 
-    //This is the condition for the next level or game finish.
+    // Update is called once per frame
     void Update()
     {
+        // Check if the count of collected collectibles equals the desired number
         if (count == 3)
         {
+            // Load the next scene when the desired number of collectibles is reached
             SceneManager.LoadScene(2);
         }
     }
